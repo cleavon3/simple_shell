@@ -2,7 +2,6 @@
 /**
  * get_history_file - gets the history file
  * @info: parameter struct
- *
  * Return: allocated string containing history file
  */
 char *get_history_file(info_t *info)
@@ -10,8 +9,7 @@ char *get_history_file(info_t *info)
 char *dir = _getenv(info, "HOME=");
 if (!dir)
 return (NULL);
-char *buf;
-buf = malloc(_strlen(dir) + _strlen(HIST_FILE) + 2);
+char *buf = malloc(_strlen(dir) + _strlen(HIST_FILE) + 2);
 if (!buf)
 return (NULL);
 sprintf(buf, "%s/%s", dir, HIST_FILE);
@@ -20,7 +18,6 @@ return (buf);
 /**
  * write_history - creates a file, or appends to an existing file
  * @info: the parameter struct
- *
  * Return: 1 on success, else -1
  */
 int write_history(info_t *info)
@@ -45,7 +42,6 @@ return (1);
 /**
  * read_history - reads history from file
  * @info: the parameter struct
- *
  * Return: histcount on success, 0 otherwise
  */
 int read_history(info_t *info)
@@ -89,16 +85,15 @@ return (info->histcount);
 }
 /**
  * build_history_list - adds entry to a history linked list
- * @info: Structure containing potential arguments. Used to maintain
+ * @info: Structure containing potential arguments.
  * @buf: buffer
  * @linecount: the history linecount, histcount
- *
  * Return: Always 0
  */
 int build_history_list(info_t *info, char *buf, int linecount)
 {
 list_t *node = info->history;
-if (node)
+if (!node)
 node = info->history;
 add_node_end(&node, buf, linecount);
 if (!info->history)
@@ -107,8 +102,7 @@ return (0);
 }
 /**
  * renumber_history - renumbers the history linked list after changes
- * @info: Structure containing potential arguments. Used to maintain
- *
+ * @info: Structure containing potential arguments.
  * Return: the new histcount
  */
 int renumber_history(info_t *info)
